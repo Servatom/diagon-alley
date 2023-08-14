@@ -1,5 +1,7 @@
 ### VisualStudioCode template
 .vscode/*
+.vscode/
+bin
 dist/*
 !.vscode/settings.json
 !.vscode/tasks.json
