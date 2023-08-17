@@ -5,6 +5,7 @@ import (
 
 	domain_auth "github.com/servatom/diagon-alley/src/internal/domain/auth"
 	base_repository "github.com/servatom/diagon-alley/src/internal/repository/base"
+	repository_order "github.com/servatom/diagon-alley/src/internal/repository/order"
 	"github.com/servatom/diagon-alley/src/utils"
 	"gorm.io/gorm"
 )
@@ -13,6 +14,7 @@ type UserRepository struct {
 	Email        string `json:"email" gorm:"type:varchar(100);not null;unique"`
 	Password     string `json:"password" gorm:"type:varchar(100);not null"`
 	IsAdmin      bool   `json:"is_admin" gorm:"default:false"`
+	OrderMaps    []repository_order.OrderRepository `json:"order_maps" gorm:"foreignKey:UserID"`
 	base_repository.BaseRepository
 }
 

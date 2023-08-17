@@ -9,4 +9,6 @@ func SetProductRoutes(
 	router *fiber.App,
 	controller controller_product.ProductController,
 ) {
+	productRouter := router.Group("/product")
+	productRouter.Get("/all", controller.GetAllProducts)
 }

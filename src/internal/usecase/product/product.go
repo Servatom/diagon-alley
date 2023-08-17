@@ -31,6 +31,27 @@ func (p *ProductUsecaseImplementation) UpdateProduct(
 	return product, nil
 }
 
+func (p *ProductUsecaseImplementation) GetAllProducts(
+	ctx context.Context,
+) ([]*domain_product.ProductWithID, error) {
+	products, err := p.productRepo.GetAllProducts(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return products, nil
+}
+
+func (p *ProductUsecaseImplementation) GetProductsByIds(
+	ctx context.Context,
+	product_ids []int64,
+) ([]*domain_product.ProductWithID, error) {
+	products, err := p.productRepo.GetProductsByIds(ctx, product_ids)
+	if err != nil {
+		return nil, err
+	}
+	return products, nil
+}
+
 func NewProductUsecaseImplementation(
 	config *utils.Config,
 	productRepo domain_product.Repository,

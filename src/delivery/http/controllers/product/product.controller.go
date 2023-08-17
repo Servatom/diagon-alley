@@ -6,13 +6,24 @@ import (
 	utils "github.com/servatom/diagon-alley/src/utils"
 )
 type ProductController interface {
-	CreateProduct (ctx *fiber.Ctx) (err error)
-	UpdateProduct (ctx *fiber.Ctx) (err error)
+	GetAllProducts (ctx *fiber.Ctx) (err error)
 }
 
 type ProductControllerImplementation struct {
 	config *utils.Config
 	usecaseProduct domain_product.Usecase
+}
+
+func (controller *ProductControllerImplementation) GetAllProducts(
+	ctx *fiber.Ctx,
+) (err error) {
+	products, err := controller.usecaseProduct.GetAllProducts(ctx.Context())
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+	return ctx.Status(fiber.StatusOK).JSON(products)
 }
 
 

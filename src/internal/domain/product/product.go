@@ -22,9 +22,13 @@ type ProductWithID struct {
 type Repository interface {
 	CreateProduct(ctx context.Context, newProduct Product) (*ProductWithID, error)
 	UpdateProduct(ctx context.Context, newProduct Product, productId int64) (*ProductWithID, error)
+	GetAllProducts(ctx context.Context) ([]*ProductWithID, error)
+	GetProductsByIds(ctx context.Context, productIds []int64) ([]*ProductWithID, error)
 }
 
 type Usecase interface {
 	CreateProduct(ctx context.Context, newProduct Product) (*ProductWithID, error)
 	UpdateProduct(ctx context.Context, newProduct Product, productId int64) (*ProductWithID, error)
+	GetAllProducts(ctx context.Context) ([]*ProductWithID, error)
+	GetProductsByIds(ctx context.Context, productIds []int64) ([]*ProductWithID, error)
 }
