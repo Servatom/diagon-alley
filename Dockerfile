@@ -15,9 +15,7 @@ RUN apk add --no-cache ca-certificates
 COPY --from=builder /app/dist/diagon-alley /var/run/diagon-alley
 COPY --from=builder /app/dist/diagon-alley-create-user /var/run/diagon-alley-create-user
 COPY --from=builder /app/dist/ /bin
-# copy views
-RUN mkdir -p ./views
-COPY --from=builder /app/views ./views
+
 ENV APP_USER=appuser
 RUN addgroup -S $APP_USER && adduser -S $APP_USER -G $APP_USER
 RUN chown -R $APP_USER:$APP_USER /var/run/diagon-alley
