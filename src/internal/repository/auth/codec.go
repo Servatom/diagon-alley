@@ -10,6 +10,7 @@ func (userRepo UserRepository) toDomainUser() *domain_auth.UserWithID {
 			Password: userRepo.Password,
 			Gender: userRepo.Gender,
 			Age: userRepo.Age,
+			IsAdmin: userRepo.IsAdmin,
 		},
 	}
 }

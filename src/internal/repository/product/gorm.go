@@ -16,7 +16,7 @@ type ProductRepository struct {
 	Color         string  `json:"color" gorm:"type:varchar(100);not null"`
 	Image         string  `json:"image" gorm:"type:varchar(100);not null"`
 	AverageRating float32 `json:"average_rating" gorm:"type:float;not null"`
-    Description   string  `json:"description" gorm:"type:varchar(100);not null"`
+    Description   string  `json:"description" gorm:"type:varchar(10000);not null"`
 	OrderProductMaps []repository_order.OrderProductMapRepository `json:"order_product_maps" gorm:"foreignKey:ProductID"`
 	base_repository.BaseRepository
 }

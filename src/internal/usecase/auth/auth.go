@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/golang-jwt/jwt"
 	domain_auth "github.com/servatom/diagon-alley/src/internal/domain/auth"
 	"github.com/servatom/diagon-alley/src/utils"
-	"github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
