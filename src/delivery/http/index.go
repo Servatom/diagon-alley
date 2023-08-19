@@ -26,7 +26,7 @@ func RestDeliver(
 	orderController := controller_order.NewOrderControllerImplementation(config, usecases.Order)
 	
 	auth_middleware := middleware_auth.NewAuthMiddlewareImplementation(config, usecases.Auth)
-	routers.SetAuthRoutes(app, authController)
+	routers.SetAuthRoutes(app, authController, auth_middleware)
 	routers.SetAdminRoutes(app, adminController, auth_middleware)
 	routers.SetProductRoutes(app, productController)
 	routers.SetOrderRoutes(app, orderController, auth_middleware)

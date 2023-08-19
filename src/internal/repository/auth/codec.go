@@ -8,6 +8,8 @@ func (userRepo UserRepository) toDomainUser() *domain_auth.UserWithID {
 		User:     domain_auth.User{
 			Email:    userRepo.Email,
 			Password: userRepo.Password,
+			Gender: userRepo.Gender,
+			Age: userRepo.Age,
 		},
 	}
 }
@@ -17,5 +19,7 @@ func NewUserRepository(
 	return &UserRepository{
 		Email:        user.Email,
 		Password:     user.Password,
+		Gender: user.Gender,
+		Age: user.Age,
 	}
 }

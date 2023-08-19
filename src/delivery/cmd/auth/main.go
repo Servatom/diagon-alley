@@ -56,7 +56,21 @@ func main() {
 		return
 	}
 
-	_, err = authUsecase.CreateUser(ctx, email, password)
+	// get gender
+	var gender string
+	fmt.Print("\nWhat is your Gender? (m/f): ")
+	fmt.Scanln(&gender)
+	if gender != "f" && gender != "m"{
+		fmt.Print("m for Male, f for Female, o for others")
+		return
+	}
+
+	// age 
+	var age int
+	fmt.Print("\nWhat is your age?: ")
+	fmt.Scanln(&age)
+
+	_, err = authUsecase.CreateUser(ctx, email, password, gender, age)
 	if err != nil {
 		return
 	}

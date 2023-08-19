@@ -7,6 +7,7 @@ import (
 )
 type AuthController interface {
 	Login(ctx *fiber.Ctx) (err error)
+	Me(ctx *fiber.Ctx) (err error)
 }
 
 type AuthControllerImplementation struct {
@@ -27,6 +28,20 @@ func (ac *AuthControllerImplementation) Login(ctx *fiber.Ctx) (err error) {
 		"token": token,
 	})
 }
+
+func (ac *AuthControllerImplementation) Me(
+	ctx *fiber.Ctx,
+) (err error) {
+	user := ctx.Locals("user").(*domain_auth.UserWithID)
+	userProfile, err := ac.usecaseAuth.GetMe(ctx.Context(), user.ID)
+	if err != nil {
+		return ctx.Status(500).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+	return ctx.Status(200).JSON(userProfile)
+}
+
 
 func NewAuthControllerImplementation(
 	config *utils.Config,

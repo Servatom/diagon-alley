@@ -38,6 +38,8 @@ func (a *AuthUsecaseImplementation) CreateUser(
 	ctx context.Context,
 	email string,
 	password string,
+	gender string,
+	age int,
 ) (bool, error) {
 	// validate email
 	_, err := mail.ParseAddress(email)
@@ -67,6 +69,8 @@ func (a *AuthUsecaseImplementation) CreateUser(
 		Email:        strings.ToLower(email),
 		Password:     string(hashedPassword),
 		IsAdmin:      isAdmin,
+		Gender: gender,
+		Age: age,
 	}
 	_, err = a.authRepository.CreateUser(user)
 	if err != nil {
@@ -159,9 +163,31 @@ func (a *AuthUsecaseImplementation) GetAllUsers(
 			ID:           user.ID,
 			Email:        user.Email,
 			IsAdmin:      user.IsAdmin,
+			Gender:       user.Gender,
+			Age:          user.Age,
 		})
 	}
 	return userDetails, nil
+}
+
+func (a *AuthUsecaseImplementation) GetMe(
+	ctx context.Context,
+	user_id int64,
+) (*domain_auth.UserProfile, error) {
+	user, err := a.authRepository.GetUserById(ctx, user_id)
+	if err != nil {
+		return nil, err
+	}
+	var finalResponse domain_auth.UserProfile
+	if user.Gender == "f" {
+		finalResponse.Gender = "Female"
+	}else if user.Gender == "m" {
+		finalResponse.Gender = "Male"
+	}else{
+		finalResponse.Gender = "other"
+	}
+	finalResponse.Age = user.Age
+	return &finalResponse, nil
 }
 
 func NewAuthUsecaseImplementation(

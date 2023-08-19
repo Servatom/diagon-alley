@@ -14,6 +14,8 @@ type UserRepository struct {
 	Email        string `json:"email" gorm:"type:varchar(100);not null;unique"`
 	Password     string `json:"password" gorm:"type:varchar(100);not null"`
 	IsAdmin      bool   `json:"is_admin" gorm:"default:false"`
+	Gender       string `json:"gender" gorm:"type:varchar(100);default:m;not null"`
+	Age          int    `json:"age" gorm:"default:18;not null"`
 	OrderMaps    []repository_order.OrderRepository `json:"order_maps" gorm:"foreignKey:UserID"`
 	base_repository.BaseRepository
 }
@@ -81,6 +83,18 @@ func (a *AuthRepositoryImplementation) GetAllUsers(
 		domainUsers = append(domainUsers, user.toDomainUser())
 	}
 	return domainUsers, nil
+}
+
+func (a *AuthRepositoryImplementation)GetUserById(
+	ctx context.Context,
+	id int64,
+) (*domain_auth.UserWithID, error) {
+	user := &UserRepository{}
+	err := a.db.Where("id = ?", id).First(user).Error
+	if err != nil {
+		return nil, err
+	}
+	return user.toDomainUser(), nil
 }
 
 func NewAuthRepositoryImplementation(
