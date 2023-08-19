@@ -30,6 +30,7 @@ func RestDeliver(
 	routers.SetAdminRoutes(app, adminController, auth_middleware)
 	routers.SetProductRoutes(app, productController)
 	routers.SetOrderRoutes(app, orderController, auth_middleware)
+	routers.SetHealthRoutes(app)
 
 	err := app.Listen(":9000")
 	if err != nil {
