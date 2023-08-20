@@ -187,6 +187,7 @@ func (a *AuthUsecaseImplementation) GetMe(
 		finalResponse.Gender = "other"
 	}
 	finalResponse.Age = user.Age
+	finalResponse.Name = user.Name
 	return &finalResponse, nil
 }
 

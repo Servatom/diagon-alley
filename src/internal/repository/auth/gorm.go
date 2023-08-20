@@ -11,6 +11,7 @@ import (
 )
 
 type UserRepository struct {
+	Name         string `json:"name" gorm:"type:varchar(1000)`
 	Email        string `json:"email" gorm:"type:varchar(100);not null;unique"`
 	Password     string `json:"password" gorm:"type:varchar(100);not null"`
 	IsAdmin      bool   `json:"is_admin" gorm:"default:false"`

@@ -5,6 +5,7 @@ import (
 )
 
 type User struct {
+	Name         string `json:"name"`
 	Email        string `json:"email"`
 	Password     string `json:"password"`
 	IsAdmin 	 bool   `json:"is_admin"`
@@ -22,6 +23,7 @@ type UserWithID struct {
 	User `json:",inline"`
 }
 type UserDetails struct {
+	Name         string `json:"name"`
 	ID           int64  `json:"id"`
 	Email        string `json:"email"`
 	IsAdmin      bool   `json:"is_admin"`
@@ -30,6 +32,7 @@ type UserDetails struct {
 }
 
 type UserProfile struct {
+	Name   string `json:"name"`
 	Gender string `json:"gender"`
 	Age    int    `json:"age"`
 }

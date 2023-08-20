@@ -6,6 +6,7 @@ func (userRepo UserRepository) toDomainUser() *domain_auth.UserWithID {
 	return &domain_auth.UserWithID{
 		ID:       userRepo.ID,
 		User:     domain_auth.User{
+			Name:     userRepo.Name,
 			Email:    userRepo.Email,
 			Password: userRepo.Password,
 			Gender: userRepo.Gender,
